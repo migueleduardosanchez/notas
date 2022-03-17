@@ -5,7 +5,7 @@ namespace App\Providers;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Routing\UrlGerator;
+use Illuminate\Routing\UrlGenerator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(UrlGerator $url)
+    public function boot(UrlGenerator $url)
     {
         if(env('REDIRECT_HTTPS')){
             $url->formatScheme('https://');
