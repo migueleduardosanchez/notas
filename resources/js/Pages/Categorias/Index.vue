@@ -10,7 +10,7 @@
     <div>
         <div class="max-w-6xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="block mb-8">
-                    <inertia-link :href="route('noticias.create')"
+                    <inertia-link :href="route('categorias.create')"
                          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-8 rounded-md"
                     >
                         Crear
@@ -24,26 +24,28 @@
                         <thead>
                             <tr>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Titulo
-								</th>
-                                <th scope="col" colspan="2" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Categoría
+								</th>
+                                <th scope="col"  colspan="2" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Estatus
 								</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <tr v-for="nota in notas" :key="nota.id">
+                            <tr v-for="categoria in categorias" :key="categoria.id">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    {{nota.titulo}}
+                                    {{categoria.category_name}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    {{nota.category_name}}
+                                    <span v-if="categoria.category_status == 1">Enabled</span>
+                                    <span v-else>Disabled</span>
+
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    <inertia-link :href="route('noticias.show',nota.id)" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">
+                                    <inertia-link :href="route('categorias.show',categoria.id)" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">
                                         Ver
                                     </inertia-link>
-                                </td>
+                                </td> 
                             </tr>
                         </tbody>
                     </table>
@@ -61,13 +63,12 @@
 <script>
     import { defineComponent } from 'vue'
     import AppLayout from '@/Layouts/AppLayout.vue'
-    
     export default defineComponent({
         components: {
             AppLayout,
         },
         props: {
-            notas: Array
+            categorias: Array
         }
     })
 </script>

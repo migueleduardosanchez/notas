@@ -15,34 +15,22 @@
                             <div class="px-4 py-5 bg-white sm:p-6">
 
                                     <label class="block font-medium text-sm text-gray-700">
-                                        Título
+                                        Nombre de la categoria
                                     </label>
 
                                     <textarea 
                                         class="form-input w-full rounded-md shadow-sm"
-                                        v-model="form.titulo"
+                                        v-model="form.category_name"
                                     ></textarea>
 
                                     <label class="block font-medium text-sm text-gray-700">
-                                        Contenido
+                                        Estatus
                                     </label>
 
-                                    <textarea 
-                                        class="form-input w-full rounded-md shadow-sm"
-                                        v-model="form.contenido"
-                                        rows="8"
-                                    ></textarea>
-
-                                     <label class="block font-medium text-sm text-gray-700">
-                                        Categoría
-                                    </label>
-
-                                    <select v-model="form.categories_id" class="form-input w-full rounded-md shadow-sm">
-                                        <option value="">Seleccionar</option>
-                                        <option :value="category.id" v-for="category in categories" :key="category.id">
-                                            {{category.category_name}}
-                                        </option>
-                                    </select>
+                                    <select v-model="form.category_status" class="form-input w-full rounded-md shadow-sm">
+                                            <option value=1>Enabled</option>
+                                            <option value=0>Disabled</option>
+                                        </select>
                             
                                     <button 
                                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
@@ -66,27 +54,22 @@
 <script>
     import { defineComponent } from 'vue'
     import AppLayout from '@/Layouts/AppLayout.vue'
-
-     export default defineComponent({
+    export default defineComponent({
         components: {
             AppLayout,
-        },
-        props:{
-            categories: Array,
         },
         data () {
             return {
                 form: {
-                    titulo: '',
-                    contenido: '',
-                    categories_id: ''
+                    category_name: '',
+                    category_status: ''
                 }
             }
         },
         methods: {
             enviar() {
                 
-                this.$inertia.post(this.route('noticias.store'), this.form)
+                this.$inertia.post(this.route('categorias.store'), this.form)
             }
         }
     })
